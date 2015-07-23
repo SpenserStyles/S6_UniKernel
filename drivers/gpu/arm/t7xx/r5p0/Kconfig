@@ -29,6 +29,25 @@ config MALI_DVFS
 	help
 	  Choose this option to enable DVFS on MALI T7xx DDK.
 
+choice
+	prompt "Choose default Mali GPU governor
+	depends on MALI_DVFS
+	default MALI_INTERACTIVE
+
+config MALI_INTERACTIVE
+	bool "Interactive"
+
+config MALI_STATIC
+	bool "Static"
+
+config MALI_BOOSTER
+	bool "Booster"
+
+config MALI_DEFAULT
+	bool "Default
+
+endchoice
+
 config MALI_RT_PM
 	bool "Enable Runtime power management"
 	depends on MALI_T7XX
