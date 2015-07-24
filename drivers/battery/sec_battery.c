@@ -4965,8 +4965,14 @@ static int sec_bat_parse_dt(struct device *dev,
 				pr_info("%s : Temp_adc_table(data) is Empty\n",
 					__func__);
 
-			ret = of_property_read_u32_index(np,
+			if (variant_edge == IS_EDGE) {
+				ret = of_property_read_u32_index(np,
+							 "battery,temp_table_adc_E", i, &temp);
+			} else {
+				ret = of_property_read_u32_index(np,
 							 "battery,temp_table_adc", i, &temp);
+			}
+
 			pdata->temp_amb_adc_table[i].adc = (int)temp;
 			if (ret)
 				pr_info("%s : Temp_amb_adc_table(adc) is Empty\n",
