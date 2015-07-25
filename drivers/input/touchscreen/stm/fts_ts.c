@@ -1710,6 +1710,12 @@ static int fts_parse_dt(struct i2c_client *client)
 	if (of_property_read_string_index(np, "stm,project_name", 1, &pdata->model_name))
 		tsp_debug_dbg(true, dev, "skipped to get model_name property\n");
 
+	if (variant_edge == IS_EDGE) {
+		/* Edge device tree does not specify model and project name, so empty the variables for correct display version */
+		pdata->project_name = "";
+		pdata->model_name = "";
+	}
+
 	pdata->max_width = 28;
 	pdata->support_hover = true;
 	pdata->support_mshover = true;
